@@ -12,6 +12,10 @@ export const homeRoutes: Routes = [
         loadChildren: 'app/dashboard/dashboard.module#DashboardModule'
       },
       {
+        path: 'prediction',
+        loadChildren: 'app/prediction/prediction.module#PredictionModule'
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'

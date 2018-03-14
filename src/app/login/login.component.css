@@ -1,0 +1,13 @@
+.login-container{
+    max-width: 600px; 
+    margin: 60px auto 0;
+}
+.login-cover{
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+.error{
+    color: tomato; 
+    font-size: 12px; 
+    padding-top: 4px
+}

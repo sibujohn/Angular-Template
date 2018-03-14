@@ -11,7 +11,7 @@ import * as LoginModels from './login.models';
 })
 export class LoginComponent implements OnInit {
 
-  private loginModel : LoginModels.signinModel = {
+  private loginModel : LoginModels.SigninModel = {
     username : null,
     password : null
   };
