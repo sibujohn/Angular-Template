@@ -1,38 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { HttpRequestService } from '../globals/shared-services/http-request.service';
 
 import { PredictionModel } from './dashboard.models';
-
-const PREDICTIONS : PredictionModel[] = [
-  {
-    predictionId: '1',
-    fileName: 'Test.pdf',
-    fileType: 'pdf',
-    fileSize: '2MB',
-    predictionStatus: 'Predicting'
-  },
-  {
-    predictionId: '2',
-    fileName: 'Test.pdf',
-    fileType: 'pdf',
-    fileSize: '1MB',
-    predictionStatus: 'Certiied'
-  }
-];
 
 @Injectable()
 export class DashboardService {
 
-  private predictionUrl = '/predictions';
+  private predictionUrl = '/getPredictions';
 
-  constructor(private http: HttpClient) {
+  constructor(private http :HttpRequestService) {
     
   }
   /** GET predictions from the server */
-  getPredictionResults (): Observable<PredictionModel[]> {
-    // return this.http.get<PredictionModel[]>(this.predictionUrl)
-    return Observable.of(PREDICTIONS);
+  getPredictionResults (): any {
+    return this.http.getRequest(this.predictionUrl);
   }
 }

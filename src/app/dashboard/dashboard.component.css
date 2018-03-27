@@ -4,11 +4,11 @@
 }
 .my-drop-zone {
     border: dotted 3px #d3d3d3;
-    height: 108px;
+    height: 200px;
     text-align: center;
     color: #7d7b7b;
     font-size: 18px;
-    padding: 34px 0;
+    padding: 80px 0;
 }
 th, td{
     text-align: center;
@@ -16,6 +16,46 @@ th, td{
 .queue-progress{
     padding-bottom: 10px;
 }
-.prediction-details{
-    cursor: pointer;
+.small-card{
+    height: 180px;
+}
+.card-img-top{
+    width: 50px;
+    height: 60px;
+    margin: 10px auto;
+}
+.card-img-top i{
+    font-size: 58px;
+    color:red;
+}
+.processing{
+    color: blue;
+}
+.awaiting{
+    color: red;
+}
+.certified{
+    color: green;
+}
+.card-body{
+    height: 99px;
+    border-top: 1px solid #ccc;
+}
+.card-title{
+    padding: 0 15px;
+    margin-bottom: 5px;
+}
+.text-row{
+    width: 100%;
+    padding: 0 15px;
+    height: 38px;
+}
+.text-row span{
+    padding: 5px 0
+}
+.text-row i{
+    padding: 10px;
+}
+.btn-info{
+    margin: 50% -30%;
 }

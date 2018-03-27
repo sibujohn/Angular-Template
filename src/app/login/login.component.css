@@ -1,5 +1,6 @@
 .login-container{
-    max-width: 600px; 
+    max-width: 600px;
+    height: auto;
     margin: 60px auto 0;
 }
 .login-cover{
@@ -10,4 +11,11 @@
     color: tomato; 
     font-size: 12px; 
     padding-top: 4px
+}
+.login-button{
+    padding-top: 10px;
+    text-align: right;
+}
+button{
+    width: 100px;
 }

@@ -1,0 +1,122 @@
+<!-- <image-cropper *ngIf="imageBase64" 
+    [imageBase64]="imageBase64"
+    [maintainAspectRatio]="false"
+    [resizeToWidth]="100"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+></image-cropper> -->
+<div class="container"> 
+    <div class="row">
+        <div class="col-sm-6"> 
+            <div class="row">
+                <div class="img-cover">
+                    <img *ngIf="imageBase64?.base64Img" [src]="imageBase64?.base64Img"/>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-6"> 
+            <div class="row">
+                <div class="certify-form">
+                    <h2>Certify Prediction</h2>
+                    <div class="status">
+                        <i class="fa" [ngClass]="{'fa-clock-o':certifyObj?.CertifyStatus === 'Awaiting', 'fa-check':certifyObj?.CertifyStatus === 'Certified'}"></i>
+                    </div>
+                    <br>
+                    <form name="form" #CertifyForm="ngForm"  *ngIf="certifyObj" [ngClass]="{'certified':certifyObj?.CertifyStatus === 'Certified'}">
+                        <div class="scroll-cover" >
+                            <div class="scroller">
+                                <div class="form-group f-left" >
+                                    <div class="col-sm-5  f-left">
+                                        <label for="vendor">Vendor</label>
+                                    </div>
+                                    <div class="col-sm-7  f-left">
+                                        <label for="vendor" [hidden]="certifyObjEditMode">{{certifyObj?.Vendor}}</label>
+                                        <input type="text" [hidden]="!certifyObjEditMode" class="form-control" name="vendor" [(ngModel)]="certifyObj.Vendor" #vendor="ngModel"/>
+                                    </div>
+                                </div>
+                                <div class="form-group f-left" >
+                                    <div class="col-sm-5  f-left">
+                                        <label for="country">Country</label>
+                                    </div>
+                                    <div class="col-sm-7  f-left">
+                                        <label for="vendor" [hidden]="certifyObjEditMode">{{certifyObj?.Country}}</label>
+                                        <input type="text" [hidden]="!certifyObjEditMode" class="form-control" name="country" [(ngModel)]="certifyObj.Country" #country="ngModel"/>
+                                    </div>
+                                </div>
+                                <div class="form-group f-left" >
+                                    <div class="col-sm-5  f-left">
+                                        <label for="category">Category</label>
+                                    </div>
+                                    <div class="col-sm-7  f-left">
+                                        <label for="vendor" [hidden]="certifyObjEditMode">{{certifyObj?.Category}}</label>
+                                        <input type="text" [hidden]="!certifyObjEditMode" class="form-control" name="category" [(ngModel)]="certifyObj.Category" #category="ngModel"/>
+                                    </div>
+                                </div>
+                                <div class="form-group f-left" >
+                                    <div class="col-sm-5  f-left">
+                                        <label for="category">Certificate No</label>
+                                    </div>
+                                    <div class="col-sm-7  f-left">
+                                        <label for="vendor" [hidden]="certifyObjEditMode">{{certifyObj?.CertificateNo}}</label>
+                                        <input type="text" [hidden]="!certifyObjEditMode" class="form-control" name="certificateno" [(ngModel)]="certifyObj.CertificateNo" #certificateno="ngModel"/>
+                                    </div>
+                                </div>
+                                <div class="form-group f-left" >
+                                    <div class="col-sm-5  f-left">
+                                        <label for="category">Purchase Order</label>
+                                    </div>
+                                    <div class="col-sm-7  f-left">
+                                        <label for="vendor" [hidden]="certifyObjEditMode">{{certifyObj?.PurchaseOrder}}</label>
+                                        <input type="text" [hidden]="!certifyObjEditMode" class="form-control" name="purchaseorder" [(ngModel)]="certifyObj.PurchaseOrder" #purchaseorder="ngModel"/>
+                                    </div>
+                                </div>
+                                <div class="form-group f-left" >
+                                    <div class="col-sm-5  f-left">
+                                        <label for="category" [hidden]="certifyObjEditMode">{{certifyObj?.HeatNo?.key}}</label>
+                                        <input type="text" [hidden]="!certifyObjEditMode" class="form-control" name="heatnokey" [(ngModel)]="certifyObj.HeatNo.key" #heatnokey="ngModel"/>
+                                    </div>
+                                    <div class="col-sm-7  f-left ">
+                                        <label [hidden]="certifyObjEditMode" class="heat-value" *ngFor="let heatValue of certifyObj?.HeatNo?.values">{{heatValue?.value}}</label>
+                                        <select *ngIf="suggestionObj" [hidden]="!certifyObjEditMode" class="form-control">
+                                            <option *ngFor="let heatNoSuggestion of suggestionObj?.HeatNo?.suggestions"  title="{{heatNoSuggestion.value}}">                                                
+                                                <span>{{heatNoSuggestion.value}}</span>
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group f-left" >
+                                    <div class="col-sm-5  f-left">
+                                        <label for="category" [hidden]="certifyObjEditMode">{{certifyObj?.ProductId?.key}}</label>
+                                        <input type="text" [hidden]="!certifyObjEditMode" class="form-control" name="productidkey" [(ngModel)]="certifyObj.ProductId.key" #productidkey="ngModel"/>
+                                    </div>
+                                    <div class="col-sm-7  f-left ">
+                                        <label  [hidden]="certifyObjEditMode" class="heat-value" *ngFor="let productValue of certifyObj?.ProductId?.values">{{productValue?.value}}</label>
+                                        <select *ngIf="suggestionObj" [hidden]="!certifyObjEditMode" class="form-control">
+                                            <option *ngFor="let productSuggestion of suggestionObj?.ProductId?.suggestions"  title="{{productSuggestion.value}}">
+                                                <span>{{productSuggestion.value}}</span>
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group f-left" >
+                                    <div class="col-sm-5  f-left">
+                                        <label for="category" [hidden]="certifyObjEditMode">{{certifyObj?.ProductDescription?.key}}</label>
+                                        <input type="text" [hidden]="!certifyObjEditMode" class="form-control" name="productdescriptionkey" [(ngModel)]="certifyObj.ProductDescription.key" #productdescriptionkey="ngModel"/>
+                                    </div>
+                                    <div class="col-sm-7  f-left ">
+                                        <label  [hidden]="certifyObjEditMode" class="heat-value" *ngFor="let pdValue of certifyObj?.ProductDescription?.values">{{pdValue?.value}}</label>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="form-group f-left certify-submit">
+                            <button class="btn btn-primary" (click)="certifyApprove()">Certify Approve</button>
+                            <button [hidden]="certifyObjEditMode" class="btn btn-primary" (click)="certifyReject()">Certify Reject</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

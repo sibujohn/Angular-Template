@@ -1,0 +1,92 @@
+.img-cover{
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
+    margin: 20px;
+}
+img{
+    height: 100%;
+    width: 100%;
+}
+form{
+    height: calc(100% - 60px);
+    float: left;
+}
+.certify-form{
+    height: calc(100% - 40px);
+    margin: 20px;
+    padding: 10px;
+    float: left;
+    border: 1px solid #ccc;
+}
+.certify-form h2{
+    width: 80%;
+    float: left;
+    padding-bottom: 24px;
+}
+.certify-form .status{
+    width: 24px;
+    height: 24px;
+    float: right;
+    text-align: center;
+    margin-top: 14px;
+}
+.status .fa-clock-o{
+    color:red;
+}
+.status .fa-check{
+    color: green;
+}
+.scroll-cover{
+    padding-top: 10px;
+    height: calc(100% - 58px);
+    border-top: 1px solid #b9b9b9;
+    border-bottom: 1px solid #b9b9b9;
+}
+.certified .scroll-cover{
+    height:100%;
+}
+.scroller{
+    float: left;
+    overflow: auto;
+    height: 100%;
+}
+.form-group{
+    padding-top: 3px;
+    height: 38px;
+}
+.scroller .form-group{
+    height:auto;
+    border-bottom: 1px solid #b9b9b9;
+}
+.scroller .form-group:last-child{
+    border-bottom:none;
+}
+.form-group div:first-child label{
+    font-weight: 600;
+    float: right;
+}
+.form-group div:last-child label{
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-left: 3px;
+    margin-right: 3px;
+    background: #f1f1f1;
+}
+.form-group input{
+    height: 26px;
+    margin-bottom: 16px;
+}
+.form-group select{
+    height: 26px;
+    padding: 0 0.75rem;
+}
+.certify-submit{
+    text-align: center;
+    padding-top: 10px;
+}
+.certified .certify-submit{
+    display: none;
+}
+button{
+    margin: 0 20px;
+}

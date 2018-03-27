@@ -13,7 +13,7 @@ export const homeRoutes: Routes = [
       },
       {
         path: 'prediction',
-        loadChildren: 'app/prediction/prediction.module#PredictionModule'
+        loadChildren: 'app/certify/certify.module#CertifyModule'
       },
       {
         path: '',

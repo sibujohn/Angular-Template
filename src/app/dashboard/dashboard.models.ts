@@ -1,7 +1,7 @@
 export class PredictionModel {
-    predictionId: string;
+    certifyId: string;
     fileName: string;
     fileType: string;
     fileSize: string;
-    predictionStatus: string;
+    certfiyStatus: string
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router} from '@angular/router';
 import { LoginService } from './login.service';
-import * as LoginModels from './login.models';
+import { SigninModel } from './login.models';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import * as LoginModels from './login.models';
 })
 export class LoginComponent implements OnInit {
 
-  private loginModel : LoginModels.SigninModel = {
+  private loginModel : SigninModel = {
     username : null,
     password : null
   };
@@ -25,14 +25,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.router.navigate(['home/dashboard']);
-    // this.loginService.login(this.loginModel.username, this.loginModel.password)
-    //   .subscribe(
-    //     data => {
-    //         this.router.navigate(['home/dashboard']);
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     });
+    this.loginService.login(this.loginModel.username, this.loginModel.password)
+      .subscribe(
+        data => {
+          if(data.ResponseStatus){
+            this.router.navigate(['home/dashboard']);            
+          }
+          else{
+            console.log(data);
+          }
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

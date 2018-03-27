@@ -1,16 +1,6 @@
-<!-- <input type="file" (change)="fileChangeEvent($event)" />
-<image-cropper
-    [imageChangedEvent]="imageChangedEvent"
-    [maintainAspectRatio]="true"
-    [resizeToWidth]="100"
-    format="png"
-    (imageCropped)="imageCropped($event)"
-></image-cropper>
-<img [src]="croppedImage" /> -->
-
-<div class="container"> 
+<div class="container auto-height"> 
     <div class="row"> 
-        <div class="col-md-3"> 
+        <div class="col-md-5"> 
             <div class="select-file">Select files</div> 
             <div ng2FileDrop
                  [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
@@ -19,7 +9,7 @@
                 Drop zone
             </div>
         </div> 
-        <div class="col-md-9" style="margin-bottom: 40px"> 
+        <div class="col-md-7" style="margin-bottom: 40px"> 
             <table class="table">
                 <thead>
                 <tr>
@@ -84,28 +74,32 @@
         </div> 
     </div> 
 </div>
-<div class="container">
+<div class="container auto-height" style="margin-top: 20px">
     <div class="page-header">
         <h3>Upload Status</h3>
     </div>
-    <div class="card col-md-12" *ngFor="let prediction of predictionResults">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <h6 class="card-title">{{prediction?.fileName}}</h6>
+    <div class="row">
+        <div class="col-sm-4" *ngFor="let prediction of predictionResults">
+            <div class="card small-card" >
+                <div class="card-img-top">
+                    <i class="fa fa-file-pdf-o"></i>
                 </div>
-                <div class="col-md-3">
-                    <h6 class="card-title">{{prediction?.fileType}}</h6>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="card-title">{{prediction?.predictionStatus}}</h6>
-                </div>
-                <div class="col-md-1">
-                    <h6 class="card-title">{{prediction?.fileSize}}</h6>
-                </div>
-                <div class="col-md-1">
-                    <div class="prediction-details" (click)="predictionDetails(prediction)">
-                        <i class="fa fa-edit"></i>
+                <div class="card-body">
+                    <div class="col-sm-10 f-left">
+                        <h5 class="card-title">{{prediction?.fileName}}</h5>
+                        <!-- <div class="text-row">
+                            <span class="card-text f-left">{{prediction?.fileType}}</span>
+                            <span class="card-text f-right">{{prediction?.fileSize}}</span>
+                        </div> -->
+                        <div class="text-row">
+                            <span class="card-text f-left" [ngClass]="{ 'processing': prediction?.certifyStatus === 'Processing', 'awaiting':prediction?.certifyStatus === 'Awaiting', 'certified':prediction?.certifyStatus === 'Certified' }">{{prediction?.certifyStatus}}</span>
+                            <i class="fa" [ngClass]="{'fa-spinner  fa-spin processing': prediction?.certifyStatus === 'Processing', 'fa-clock-o awaiting':prediction?.certifyStatus === 'Awaiting', 'fa-check certified':prediction?.certifyStatus === 'Certified'}"></i>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 f-left">
+                        <a class="btn btn-info f-right" (click)="predictionDetails(prediction)" [ngClass]="{ 'disabled': prediction?.certifyStatus === 'Processing'}">
+                            <i class="fa fa-info"></i>
+                        </a>
                     </div>
                 </div>
             </div>

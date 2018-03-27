@@ -5,7 +5,7 @@ import { Router} from '@angular/router';
 import { DashboardService } from './dashboard.service';
 import { PredictionModel } from './dashboard.models';
 
-const URL = 'path_to_api';
+const uploadUrl = 'path_to_api';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,9 +15,7 @@ const URL = 'path_to_api';
 
 export class DashboardComponent implements OnInit {
   
-  // imageChangedEvent: any = '';
-  // croppedImage: any = '';
-  public uploader:FileUploader = new FileUploader({url: URL});
+  public uploader:FileUploader = new FileUploader({url: uploadUrl});
   public predictionResults : PredictionModel[] = [];
 
   constructor(private dashboardService : DashboardService, private router:Router) {
@@ -34,7 +32,7 @@ export class DashboardComponent implements OnInit {
   }
 
   predictionDetails(prediction : PredictionModel):void {
-    this.router.navigate(['home/prediction/'+prediction.predictionId]);
+    this.router.navigate(['home/prediction/'+prediction.certifyId]);
   }
 
 }
