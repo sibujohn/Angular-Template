@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise'
 import { HttpRequestService } from '../globals/shared-services/http-request.service';
 
-import { CertifyModel, PredictionSourceModel, CertifySuggestionModel } from './certify.models';
+import { CertifyModel, PredictionSourceModel, CertifySuggestionModel, SelectedSuggestionModel, OtherSuggestionModel } from './certify.models';
 
 @Injectable()
 export class CertifyService {
@@ -38,10 +38,37 @@ export class CertifyService {
   }
 
   generateSuggestionValue(suggestionObj : CertifySuggestionModel) : CertifySuggestionModel{
+    this.getSuggestionValueByKey('CertificateNo', suggestionObj);
+    this.getSuggestionValueByKey('PurchaseOrder', suggestionObj);
     this.getSuggestionValueByKey('HeatNo', suggestionObj);
     this.getSuggestionValueByKey('ProductId', suggestionObj);
     this.getSuggestionValueByKey('ProductDescription', suggestionObj);
     return suggestionObj;
+  }
+
+  generateSelectionValue(certifyObj : CertifyModel, selectedValues : SelectedSuggestionModel):SelectedSuggestionModel{
+    selectedValues = {
+      CertificateNo : '',
+      PurchaseOrder : '',
+      HeatNo : '',
+      ProductId : '',
+      ProductDescription:''
+    };
+    this.setSelectionValuesByKey('CertificateNo', certifyObj, selectedValues);
+    this.setSelectionValuesByKey('PurchaseOrder', certifyObj, selectedValues);
+    this.setSelectionValuesByKey('HeatNo', certifyObj, selectedValues);
+    this.setSelectionValuesByKey('ProductId', certifyObj, selectedValues);
+    this.setSelectionValuesByKey('ProductDescription', certifyObj, selectedValues);
+    return selectedValues;
+  }
+
+  generatetEditedCertifyValues(certify: CertifyModel,  suggestion : CertifySuggestionModel, selectedValues : SelectedSuggestionModel, otherValues : OtherSuggestionModel):CertifyModel{
+    this.setEditedCertifyFromSuggestions('CertificateNo', certify, suggestion, selectedValues, otherValues);
+    this.setEditedCertifyFromSuggestions('PurchaseOrder', certify, suggestion, selectedValues, otherValues);
+    this.setEditedCertifyFromSuggestions('HeatNo', certify, suggestion, selectedValues, otherValues);
+    this.setEditedCertifyFromSuggestions('ProductId', certify, suggestion, selectedValues, otherValues);
+    this.setEditedCertifyFromSuggestions('ProductDescription', certify, suggestion, selectedValues, otherValues);
+    return certify;
   }
 
   getSuggestionValueByKey(key: string, suggestionObj : CertifySuggestionModel) : CertifySuggestionModel{    
@@ -58,6 +85,53 @@ export class CertifyService {
       values : []
     };
     return suggestionObj;
+  }
+
+  setSelectionValuesByKey(key: string, certifyObj : CertifyModel, selectedValues: SelectedSuggestionModel) : SelectedSuggestionModel{    
+    selectedValues[key] = '';
+    if(certifyObj[key].value){
+      selectedValues[key] = certifyObj[key].value+'  ';
+    }
+    else if(certifyObj[key].values){
+      for(var i=0; i<certifyObj[key].values.length; i++){
+        selectedValues[key] = selectedValues[key] += certifyObj[key].values[i].value+'  ';
+      }
+    }
+    return selectedValues;
+  }  
+
+  setEditedCertifyFromSuggestions(key: string, certify: CertifyModel,  suggestion : CertifySuggestionModel, selectedValues : SelectedSuggestionModel, otherValues : OtherSuggestionModel):CertifyModel{
+    if(suggestion[key].isOther){
+      if(certify[key].value){
+        certify[key].value = "";
+        let otherValue = otherValues[key].trim();
+        certify[key].value = otherValue;
+      }
+      else if(certify[key].values){
+        certify[key].values = [];
+        let otherValue = otherValues[key].trim().split(' ');
+        for(let i=0; i<otherValue.length; i++){
+          if(otherValue[i].length>0){
+            certify[key].values.push({
+              value : otherValue[i]
+            });
+          }
+        }
+      }
+    }
+    else{
+      if(certify[key].value){
+        certify[key].value = selectedValues[key].trim();
+      }
+      else if(certify[key].values){
+        certify[key].values = selectedValues[key].trim().split('  ').map(function(entry) { 
+          return {
+            value : entry
+          };
+        });
+      }
+    }
+    return certify;
   }
 
   convertToDataURLviaCanvas(url: string){

@@ -4,7 +4,7 @@ import { CertifyComponent } from './certify.component';
 
 export const certifyRoutes: Routes = [
   {
-    path: ':certifyId',
+    path: ':uploadId',
     component: CertifyComponent
   }
 ];

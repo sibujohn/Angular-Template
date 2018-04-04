@@ -1,12 +1,18 @@
 export class CertifyModel {
-    CertificateNo: string;
-    CertifyStatus: string;
     Vendor: string;
     Country: string;
-    PurchaseOrder: string;
+    Category: string;
+    Status: string;
+    CertificateNo: KeyValueModel;
+    PurchaseOrder: KeyValueModel;
     HeatNo : PredictionKeyValueModel;
     ProductId : PredictionKeyValueModel;
     ProductDescription : PredictionKeyValueModel;
+    Edited : boolean;
+}
+export class KeyValueModel {
+    key : string;
+    values : string;
 }
 export class PredictionKeyValueModel {
     key : string;
@@ -15,15 +21,13 @@ export class PredictionKeyValueModel {
 export class PredictionValueModel {
     value : string;
 }
-export class PredictionSourceModel {
-    base64Img : string;
-}
 export class CertifySuggestionModel {
-    CertificateNo: string;
-    CertifyStatus: string;
     Vendor: string;
     Country: string;
-    PurchaseOrder: string;
+    Category: string;
+    Status: string;
+    CertificateNo: PredictionKeySuggestionModel;
+    PurchaseOrder: PredictionKeySuggestionModel;
     HeatNo : PredictionKeySuggestionModel;
     ProductId : PredictionKeySuggestionModel;
     ProductDescription : PredictionKeySuggestionModel;
@@ -31,9 +35,29 @@ export class CertifySuggestionModel {
 export class PredictionKeySuggestionModel {
     key : string;
     suggestions : PredictionSuggestionModel[];
+    isOther: boolean;
 }
 export class PredictionSuggestionModel {
     weightage : string;
     values : string[];
     value : string;
+}
+export class SelectedSuggestionModel {
+    CertificateNo : string;
+    PurchaseOrder : string;
+    HeatNo : string;
+    ProductId : string;
+    ProductDescription : string;
+}
+export class OtherSuggestionModel {
+    CertificateNo : string;
+    PurchaseOrder : string;
+    HeatNo : string;
+    ProductId : string;
+    ProductDescription : string;
+}
+
+
+export class PredictionSourceModel {
+    base64Img : string;
 }

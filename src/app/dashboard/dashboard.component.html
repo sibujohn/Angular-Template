@@ -86,18 +86,14 @@
                 </div>
                 <div class="card-body">
                     <div class="col-sm-10 f-left">
-                        <h5 class="card-title">{{prediction?.fileName}}</h5>
-                        <!-- <div class="text-row">
-                            <span class="card-text f-left">{{prediction?.fileType}}</span>
-                            <span class="card-text f-right">{{prediction?.fileSize}}</span>
-                        </div> -->
+                        <h5 class="card-title">{{prediction?.FileName}}</h5>
                         <div class="text-row">
-                            <span class="card-text f-left" [ngClass]="{ 'processing': prediction?.certifyStatus === 'Processing', 'awaiting':prediction?.certifyStatus === 'Awaiting', 'certified':prediction?.certifyStatus === 'Certified' }">{{prediction?.certifyStatus}}</span>
-                            <i class="fa" [ngClass]="{'fa-spinner  fa-spin processing': prediction?.certifyStatus === 'Processing', 'fa-clock-o awaiting':prediction?.certifyStatus === 'Awaiting', 'fa-check certified':prediction?.certifyStatus === 'Certified'}"></i>
+                            <span class="card-text f-left" [ngClass]="{ 'processing': prediction?.Status === 'Processing', 'awaiting':prediction?.Status === 'Awaiting', 'certified':prediction?.Status === 'Certified' }">{{prediction?.Status}}</span>
+                            <i class="fa" [ngClass]="{'fa-spinner  fa-spin processing': prediction?.Status === 'Processing', 'fa-clock-o awaiting':prediction?.Status === 'Awaiting', 'fa-check certified':prediction?.Status === 'Certified'}"></i>
                         </div>
                     </div>
                     <div class="col-sm-2 f-left">
-                        <a class="btn btn-info f-right" (click)="predictionDetails(prediction)" [ngClass]="{ 'disabled': prediction?.certifyStatus === 'Processing'}">
+                        <a class="btn btn-info f-right" (click)="predictionDetails(prediction)" [ngClass]="{ 'disabled': prediction?.Status === 'Processing'}">
                             <i class="fa fa-info"></i>
                         </a>
                     </div>

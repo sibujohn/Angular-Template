@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
   }
 
   predictionDetails(prediction : PredictionModel):void {
-    this.router.navigate(['home/prediction/'+prediction.certifyId]);
+    this.router.navigate(['home/prediction/'+prediction.UploadId]);
   }
 
 }
