@@ -2,39 +2,35 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise'
 import { HttpRequestService } from '../globals/shared-services/http-request.service';
+import { HttpConfigService } from '../globals/shared-services/http-config.service';
 
 import { CertifyModel, PredictionSourceModel, CertifySuggestionModel, SelectedSuggestionModel, OtherSuggestionModel } from './certify.models';
 
 @Injectable()
 export class CertifyService {
 
-  private certifyUrl = '/getPredictionById';
-  private predictionImgUrl = '/getPredictionSourceImg';
-  private certifyPredictionUrl = '/postCertifiedPrediction';
-  private certifySuggestionUrl = '/getCertifySuggestionsById';
-
-  constructor(private http : HttpRequestService) {
+  constructor(private http : HttpRequestService, private httpConfigService : HttpConfigService) {
     
   }
 
   /** GET predictions from the server */
   getPrediction (predictionId : string): Observable<CertifyModel> {
-    return this.http.getRequest(this.certifyUrl);
+    return this.http.getRequest(this.httpConfigService.certifyUrl);
   }
 
   /** GET prediction source image from the server as base64*/
   getPredictionSourceImg (predictionId : string): Observable<PredictionSourceModel> {
-    return this.http.getRequest(this.predictionImgUrl);
+    return this.http.getRequest(this.httpConfigService.predictionImgUrl);
   }
 
   /** POST certified prediction to the server*/
   postCertifiedPrediction (certifiedPrediction : CertifyModel): Observable<boolean> {
-    return this.http.postRequest(this.certifyPredictionUrl, certifiedPrediction);
+    return this.http.postRequest(this.httpConfigService.certifyPredictionUrl, certifiedPrediction);
   }
 
   /** GET certify suggestions from the server*/
   gettCertifySuggestions (predictionId : string): Observable<CertifySuggestionModel> {
-    return this.http.getRequest(this.certifySuggestionUrl);
+    return this.http.getRequest(this.httpConfigService.certifySuggestionUrl);
   }
 
   generateSuggestionValue(suggestionObj : CertifySuggestionModel) : CertifySuggestionModel{

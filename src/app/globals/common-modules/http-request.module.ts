@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HttpRequestService } from '../shared-services/http-request.service';
+import { HttpConfigService } from '../shared-services/http-config.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { HttpRequestService } from '../shared-services/http-request.service';
       
   ],
   providers: [
-    HttpRequestService
+    HttpRequestService,
+    HttpConfigService
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

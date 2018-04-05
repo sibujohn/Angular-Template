@@ -5,16 +5,16 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+import { HttpConfigService } from '../shared-services/http-config.service';
+
 @Injectable()
 export class HttpRequestService implements HttpInterceptor {
 
-  private baseUrl : string = "https://private-96ffbf-angular2sampleapi.apiary-mock.com";
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private httpConfigService : HttpConfigService) { }
 
   getRequest(requestUrl : any) : Observable<any> {
     return this.http.get(
-      this.baseUrl+requestUrl
+      this.httpConfigService.baseUrl + requestUrl
       // {
       //   headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)
       // }
@@ -23,7 +23,7 @@ export class HttpRequestService implements HttpInterceptor {
  
   postRequest(requestUrl : string, data : any) : Observable<any>{
     return this.http.post(
-      this.baseUrl+requestUrl,
+      this.httpConfigService.baseUrl+requestUrl,
       data
       // {
       //   headers: new HttpHeaders().set('Authorization', 'Bearer ' + token))
