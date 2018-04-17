@@ -18,11 +18,6 @@ export class CertifyService {
     return this.http.getRequest(this.httpConfigService.certifyUrl);
   }
 
-  /** GET prediction source image from the server as base64*/
-  getPredictionSourceImg (predictionId : string): Observable<PredictionSourceModel> {
-    return this.http.getRequest(this.httpConfigService.predictionImgUrl);
-  }
-
   /** POST certified prediction to the server*/
   postCertifiedPrediction (certifiedPrediction : CertifyModel): Observable<boolean> {
     return this.http.postRequest(this.httpConfigService.certifyPredictionUrl, certifiedPrediction);

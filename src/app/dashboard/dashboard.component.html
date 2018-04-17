@@ -86,7 +86,7 @@
                 </div>
                 <div class="card-body">
                     <div class="col-sm-10 f-left">
-                        <h5 class="card-title">{{prediction?.FileName}}</h5>
+                        <h5 class="card-title">{{prediction?.FileName}}.pdf</h5>
                         <div class="text-row">
                             <span class="card-text f-left" [ngClass]="{ 'processing': prediction?.Status === 'Processing', 'awaiting':prediction?.Status === 'Awaiting', 'certified':prediction?.Status === 'Certified' }">{{prediction?.Status}}</span>
                             <i class="fa" [ngClass]="{'fa-spinner  fa-spin processing': prediction?.Status === 'Processing', 'fa-clock-o awaiting':prediction?.Status === 'Awaiting', 'fa-check certified':prediction?.Status === 'Certified'}"></i>

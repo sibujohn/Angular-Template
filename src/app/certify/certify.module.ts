@@ -8,6 +8,7 @@ import { CertifyComponent } from './certify.component';
 import { CertifyService } from './certify.service';
 
 import { HttpRequestModule } from '../globals/common-modules/http-request.module';
+import { SafePipeModule } from '../globals/common-modules/safe-pipe.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HttpRequestModule } from '../globals/common-modules/http-request.module
     FormsModule,
     ImageCropperModule,
     CertifyRoutingModule,
-    HttpRequestModule
+    HttpRequestModule,
+    SafePipeModule
   ],
   declarations: [
     CertifyComponent

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router} from '@angular/router';
+import { HttpConfigService } from '../globals/shared-services/http-config.service';
 import { CertifyService } from './certify.service';
 import { CertifyModel, PredictionSourceModel, CertifySuggestionModel, SelectedSuggestionModel, OtherSuggestionModel }  from './certify.models';
 
@@ -12,7 +13,8 @@ import { CertifyModel, PredictionSourceModel, CertifySuggestionModel, SelectedSu
 export class CertifyComponent implements OnInit {
 
   // public croppedImage: any;
-  public uploadId : string;  
+  public uploadId : string;
+  public certifySourceUrl : string;
   public certifyObj : CertifyModel;  
   public suggestionObj : CertifySuggestionModel;  
   public imageBase64: PredictionSourceModel;
@@ -20,7 +22,7 @@ export class CertifyComponent implements OnInit {
   public selectedValues : SelectedSuggestionModel;
   public otherValues : OtherSuggestionModel;
 
-  constructor(private certifyService:CertifyService, private router:Router, private activatedRoute:ActivatedRoute) {
+  constructor(private httpConfigService:HttpConfigService, private certifyService:CertifyService, private router:Router, private activatedRoute:ActivatedRoute) {
 
   }
 
@@ -35,10 +37,7 @@ export class CertifyComponent implements OnInit {
 
   loadPrediction(): void {  
     this.uploadId = this.activatedRoute.snapshot.paramMap.get('uploadId');
-    this.certifyService.getPredictionSourceImg(this.uploadId)
-      .subscribe(base64Img => {
-        this.imageBase64 = base64Img;
-      });
+    this.certifySourceUrl = this.httpConfigService.uploadSrc + this.uploadId + '.pdf';
     this.certifyService.getPrediction(this.uploadId)
       .subscribe(certifyObj => {
         this.certifyObj = certifyObj;
